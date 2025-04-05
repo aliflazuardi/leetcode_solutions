@@ -17,3 +17,24 @@ def dfs(root, depth):
     dr = dfs(root.right, depth + 1)
 
     return max(dl, dr)
+
+
+# using stack
+class SolutionStack:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+
+        stack = deque()
+        stack.append((root, 1))
+
+        max_depth = 0
+        while stack:
+            node, depth = stack.pop()
+            max_depth = max(max_depth, depth)
+            if node.left:
+                stack.append((node.left, depth + 1))
+            if node.right:
+                stack.append((node.right, depth + 1))
+
+        return max_depth
